@@ -8,36 +8,3 @@ import '@stencil/router';
 
 import '@stencil/redux';
 
-import {
-  RouterHistory,
-} from '@stencil/router';
-
-import {
-  AppLogin as AppLogin
-} from './components/app-login/app-login';
-
-declare global {
-  interface HTMLAppLoginElement extends AppLogin, HTMLElement {
-  }
-  var HTMLAppLoginElement: {
-    prototype: HTMLAppLoginElement;
-    new (): HTMLAppLoginElement;
-  };
-  interface HTMLElementTagNameMap {
-    "app-login": HTMLAppLoginElement;
-  }
-  interface ElementTagNameMap {
-    "app-login": HTMLAppLoginElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "app-login": JSXElements.AppLoginAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface AppLoginAttributes extends HTMLAttributes {
-      history?: RouterHistory;
-    }
-  }
-}
-

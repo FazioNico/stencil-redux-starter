@@ -1,6 +1,5 @@
-import {
-  AppSetNameAction
-} from './app';
+import { AppSetNameAction } from './app';
+import * as auth from './auth';
 
 export interface NullAction {
   type: TypeKeys.NULL
@@ -10,6 +9,7 @@ export interface NullAction {
 export type ActionTypes =
   | NullAction
   | AppSetNameAction
+  | auth.ILoginAction
 ;
 
 export enum TypeKeys {

@@ -2,7 +2,7 @@ import { Component, Prop, State } from '@stencil/core';
 import { Store, Action } from '@stencil/redux';
 import { RouterHistory } from '@stencil/router';
 
-import { appSetName } from '../../actions/app';
+import { loginAction, fetchLogin } from '../../actions/auth';
 
 @Component({
   tag: 'app-login',
@@ -11,10 +11,13 @@ import { appSetName } from '../../actions/app';
 export class AppLogin {
 
   @Prop() history: RouterHistory;
+  @Prop({ context: 'store' }) store: Store;
 
-  appSetName: Action;
+  loginAction: Action;
+  fetchLogin: Action;
 
   switchForm(target:any){
+    console.log(target)
     let list:any = target.classList;
     let classList:any = [...list];
 
@@ -35,7 +38,7 @@ export class AppLogin {
 
   formSubmit(event){
     event.preventDefault()
-    let formData =  {}
+    let formData:any =  {}
     let formEl:any = document.forms[0].elements;
     [...formEl].map((el, i)=>{
       if(formEl[i].value){
@@ -47,11 +50,22 @@ export class AppLogin {
     // TODO: validation inputs
     let list:any = document.getElementById('switchForm').classList;
     let classList:any = [...list];
+    console.log(list,classList);
     (classList.includes('create'))
      ?  null // this.createEmailAccount(formData.email, formData.password)
-     : null// this.logInEmailAccount(formData.email, formData.password);
+     : this.logInEmailAccount(formData);
   }
 
+  logInEmailAccount(formData){
+    console.log(formData)
+    // Bind Action to Event
+    this.store.mapDispatchToProps(this, {
+      // loginAction,
+      fetchLogin
+    });
+    //this.loginAction(formData);
+    this.fetchLogin(formData);
+  }
 
   render() {
     return (
@@ -64,7 +78,7 @@ export class AppLogin {
           <input name="password" type="password" placeholder="password"/><br/>
           <button onClick={event=>this.formSubmit(event)}>Login</button>
         </form>
-        <p onClick={(e: any) => this.switchForm(e.target)} >Click here to create new account</p>
+        <p id="switchForm" onClick={(e: any) => this.switchForm(e.target)} >Click here to create new account</p>
       </div>
     );
   }
