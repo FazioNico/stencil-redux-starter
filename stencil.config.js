@@ -1,6 +1,7 @@
 exports.config = {
   bundles: [
     { components: ['my-app', 'app-home'] },
+    { components: ['app-login'] },
     { components: ['app-profile'] }
   ],
   collections: [
