@@ -1,7 +1,7 @@
 import { Component, Prop, State } from '@stencil/core';
 import { Store, Action } from '@stencil/redux';
 
-import { appSetName } from '../../actions/app';
+import { appSetName } from '../../store/actions/app';
 import { configureStore } from '../../store/index';
 
 @Component({

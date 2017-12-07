@@ -1,5 +1,5 @@
 import { AppSetNameAction } from './app';
-import * as auth from './auth';
+import * as auth from '../../components/app-login/store/auth.action';
 
 export interface NullAction {
   type: TypeKeys.NULL

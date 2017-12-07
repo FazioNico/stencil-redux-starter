@@ -2,7 +2,7 @@ import { Component, Prop, State } from '@stencil/core';
 import { Store, Action } from '@stencil/redux';
 import { RouterHistory } from '@stencil/router';
 
-import { appSetName } from '../../actions/app';
+import { appSetName } from '../../store/actions/app';
 
 @Component({
   tag: 'app-home',

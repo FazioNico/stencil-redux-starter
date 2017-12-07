@@ -1,8 +1,8 @@
-import { Component, Prop, State } from '@stencil/core';
+import { Component, Prop } from '@stencil/core';
 import { Store, Action } from '@stencil/redux';
 import { RouterHistory } from '@stencil/router';
 
-import { loginAction, fetchLogin } from '../../actions/auth';
+import { fetchLogin } from './store/auth.action';
 
 @Component({
   tag: 'app-login',
@@ -13,11 +13,9 @@ export class AppLogin {
   @Prop() history: RouterHistory;
   @Prop({ context: 'store' }) store: Store;
 
-  loginAction: Action;
   fetchLogin: Action;
 
   switchForm(target:any){
-    console.log(target)
     let list:any = target.classList;
     let classList:any = [...list];
 
@@ -36,7 +34,7 @@ export class AppLogin {
     }
   }
 
-  formSubmit(event){
+  formSubmit(event:UIEvent):void{
     event.preventDefault()
     let formData:any =  {}
     let formEl:any = document.forms[0].elements;
@@ -46,24 +44,18 @@ export class AppLogin {
       }
       return el
     })
-    console.log(formData);
     // TODO: validation inputs
     let list:any = document.getElementById('switchForm').classList;
     let classList:any = [...list];
-    console.log(list,classList);
     (classList.includes('create'))
      ?  null // this.createEmailAccount(formData.email, formData.password)
      : this.logInEmailAccount(formData);
   }
 
-  logInEmailAccount(formData){
-    console.log(formData)
-    // Bind Action to Event
+  logInEmailAccount(formData:{email:string, password:string}):void{
     this.store.mapDispatchToProps(this, {
-      // loginAction,
       fetchLogin
     });
-    //this.loginAction(formData);
     this.fetchLogin(formData);
   }
 

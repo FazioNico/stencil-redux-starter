@@ -1,4 +1,4 @@
-import { TypeKeys } from '../actions/index';
+import { TypeKeys } from './index';
 
 export interface AppSetNameAction {
   type: TypeKeys.APP_SET_NAME,

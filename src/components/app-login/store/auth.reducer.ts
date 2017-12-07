@@ -6,7 +6,7 @@
  * @Last modified time: 07-12-2017
  */
 
- import { authActions, ILoginAction } from '../actions/auth';
+ import { authActions, ILoginAction } from './auth.action';
 
  interface LoginState extends Object{}
 

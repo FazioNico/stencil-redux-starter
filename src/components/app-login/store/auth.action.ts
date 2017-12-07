@@ -46,21 +46,20 @@ export const errorAction = (payload: any)=> {
   }
 };
 
-export const fetchLogin = (payload)=> {
-  return dispatch => {
+export const fetchLogin = (payload:{email:string,password:string}) => async (dispatch, _getState) => {
     dispatch(loginAction(payload))
-    let myHeaders = new Headers();
-    myHeaders.append('cache-control','no-cache')
-    myHeaders.append('content-type','application/json')
-    myHeaders.append('x-access-token','')
-    let myInit = {
+    let headers = new Headers()
+        headers.append('cache-control','no-cache')
+        headers.append('content-type','application/json')
+        headers.append('x-access-token','')
+    let options = {
       method: 'POST',
-      headers: myHeaders,
+      headers: headers,
       body: JSON.stringify(payload)
     };
-    return fetch(`http://localhost:8080/rest/auth`,myInit)
+    return fetch(`http://localhost:8080/rest/auth`,options)
       .then(response => response.json())
       .then(json => dispatch(loginSuccessAction(json)))
       .catch(err => dispatch(errorAction(err)))
-  }
+
 }
