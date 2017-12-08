@@ -39,31 +39,19 @@ export const loginSuccessAction = (payload: any) => {
     payload: payload
   }
 };
+export const logoutAction = ()  => {
+  return {
+    type: authActions.LOGOUT
+  }
+};
+export const logoutSuccessAction = () => {
+  return {
+    type: authActions.LOGOUT_SUCCESS
+  }
+};
 export const errorAction = (payload: any)=> {
   return {
     type: authActions.ERROR,
     payload: payload
   }
 };
-
-export const fetchLogin = (payload:{email:string,password:string}) => async (dispatch, _getState) => {
-    dispatch(loginAction(payload))
-    let headers = new Headers()
-        headers.append('cache-control','no-cache')
-        headers.append('content-type','application/json')
-        headers.append('x-access-token','')
-    let options = {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(payload)
-    };
-    return fetch(`http://localhost:8080/rest/auth`,options)
-      .then(response => response.json())
-      .then(json => {
-        (json.success)
-          ? dispatch(loginSuccessAction(json))
-          : dispatch(errorAction(json))
-      })
-      .catch(err => dispatch(errorAction(err)))
-
-}

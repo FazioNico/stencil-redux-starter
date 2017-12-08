@@ -1,7 +1,7 @@
 import { Component, Prop } from '@stencil/core';
 import { Store, Action } from '@stencil/redux';
 
-import { fetchLogin } from './store/auth.action';
+import { AuthStoreService } from "./store/auth-store.service";
 
 @Component({
   tag: 'app-login',
@@ -10,7 +10,15 @@ import { fetchLogin } from './store/auth.action';
 export class AppLogin {
 
   @Prop({ context: 'store' }) store: Store;
-  fetchLogin: Action;
+  dispatchLogin: Action;
+
+  componentWillLoad() {
+    // Map Dispatch Action
+    const {fetchLogin:dispatchLogin} = AuthStoreService;
+    this.store.mapDispatchToProps(this, {
+      dispatchLogin
+    });
+  }
 
   switchForm(target:any){
     let list:any = target.classList;
@@ -50,11 +58,7 @@ export class AppLogin {
   }
 
   logInEmailAccount(formData:{email:string, password:string}):void{
-    // Map Dispatch Action
-    this.store.mapDispatchToProps(this, {
-      fetchLogin
-    });
-    this.fetchLogin(formData);
+    this.dispatchLogin(formData);
   }
 
   render() {

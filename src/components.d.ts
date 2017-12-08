@@ -10,7 +10,6 @@ import '@stencil/redux';
 
 import {
   RouterHistory,
-  MatchResults,
 } from '@stencil/router';
 
 import {
@@ -38,96 +37,6 @@ declare global {
   namespace JSXElements {
     export interface AppHomeAttributes extends HTMLAttributes {
       history?: RouterHistory;
-    }
-  }
-}
-
-
-import {
-  AppLogin as AppLogin
-} from './components/app-login/app-login';
-
-declare global {
-  interface HTMLAppLoginElement extends AppLogin, HTMLElement {
-  }
-  var HTMLAppLoginElement: {
-    prototype: HTMLAppLoginElement;
-    new (): HTMLAppLoginElement;
-  };
-  interface HTMLElementTagNameMap {
-    "app-login": HTMLAppLoginElement;
-  }
-  interface ElementTagNameMap {
-    "app-login": HTMLAppLoginElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "app-login": JSXElements.AppLoginAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface AppLoginAttributes extends HTMLAttributes {
-      
-    }
-  }
-}
-
-
-import {
-  AppProfile as AppProfile
-} from './components/app-profile/app-profile';
-
-declare global {
-  interface HTMLAppProfileElement extends AppProfile, HTMLElement {
-  }
-  var HTMLAppProfileElement: {
-    prototype: HTMLAppProfileElement;
-    new (): HTMLAppProfileElement;
-  };
-  interface HTMLElementTagNameMap {
-    "app-profile": HTMLAppProfileElement;
-  }
-  interface ElementTagNameMap {
-    "app-profile": HTMLAppProfileElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "app-profile": JSXElements.AppProfileAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface AppProfileAttributes extends HTMLAttributes {
-      match?: MatchResults;
-    }
-  }
-}
-
-
-import {
-  MyApp as MyApp
-} from './components/my-app/my-app';
-
-declare global {
-  interface HTMLMyAppElement extends MyApp, HTMLElement {
-  }
-  var HTMLMyAppElement: {
-    prototype: HTMLMyAppElement;
-    new (): HTMLMyAppElement;
-  };
-  interface HTMLElementTagNameMap {
-    "my-app": HTMLMyAppElement;
-  }
-  interface ElementTagNameMap {
-    "my-app": HTMLMyAppElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "my-app": JSXElements.MyAppAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface MyAppAttributes extends HTMLAttributes {
-      
     }
   }
 }

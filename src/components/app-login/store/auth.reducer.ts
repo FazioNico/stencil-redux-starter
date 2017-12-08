@@ -19,6 +19,9 @@
      case authActions.LOGIN_SUCCESS: {
        return Object.assign({}, state, action.payload.user)
      }
+     case authActions.LOGOUT_SUCCESS: {
+       return Object.assign({}, getInitialState())
+     }
    }
    return state;
  };

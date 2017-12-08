@@ -3,6 +3,7 @@ import { Store, Action } from '@stencil/redux';
 import { RouterHistory } from '@stencil/router';
 
 import { appSetName } from '../../store/actions/app';
+import { AuthStoreService } from '../app-login/store//auth-store.service';
 
 @Component({
   tag: 'app-home',
@@ -16,6 +17,7 @@ export class AppHome {
   @State() curentUser: any;
 
   appSetName: Action;
+  dispatchLogout: Action;
 
   componentWillLoad() {
     // TODO: check if user is auth and kick him to loginPage if not.
@@ -28,8 +30,9 @@ export class AppHome {
       return {name, curentUser}
     });
     // Map Dispatch Action
+    const {logout:dispatchLogout} = AuthStoreService;
     this.store.mapDispatchToProps(this, {
-      appSetName
+      appSetName, dispatchLogout
     });
   }
 
@@ -42,6 +45,10 @@ export class AppHome {
     console.log(this.name)
     //profile/stencil
     this.history.push(`/profile/${this.name}`,{});
+  }
+
+  onLogout():void{
+    this.dispatchLogout()
   }
 
   render() {
@@ -60,6 +67,9 @@ export class AppHome {
         </p>
           <button onClick={ _ => this.navTo()}>
             Profile page
+          </button>
+          <button onClick={ _ => this.onLogout()}>
+            Logout
           </button>
       </div>
     );
