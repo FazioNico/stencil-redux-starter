@@ -19,8 +19,6 @@ export class MyApp {
     // here we are monitoring user auth state with Redux
     this.store.mapStateToProps(this, (state) => {
       if(!this) return;
-      // use ES6 destructuring.
-      // Doc: https://nicolasfazio.ch/blog/es6-destructuring
       const curentUser = state.auth;
       //console.log('state...',this.activeRouter.get());
       (curentUser._id)

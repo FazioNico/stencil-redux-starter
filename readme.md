@@ -1,6 +1,6 @@
-# Stencil App Starter
+# Stencil Redux App Starter
 
-***=> work in proccess. currenty not ready to use!*** 
+***=> work in proccess. currenty not ready to use!***
 
 Stencil is a compiler for building fast web apps using Web Components.
 

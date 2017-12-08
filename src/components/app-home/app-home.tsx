@@ -21,6 +21,8 @@ export class AppHome {
     // TODO: check if user is auth and kick him to loginPage if not.
     // bind property to Store state
     this.store.mapStateToProps(this, (state) => {
+      // use ES6 destructuring.
+      // Doc: https://nicolasfazio.ch/blog/es6-destructuring
       const { app: { name }} = state;
       const {auth:curentUser} = state;
       return {name, curentUser}
@@ -56,11 +58,9 @@ export class AppHome {
         <p>
           <input type="text" onInput={(e: any) => this.doNameChange(e.target.value)} value={this.name}/>
         </p>
-
           <button onClick={ _ => this.navTo()}>
             Profile page
           </button>
-
       </div>
     );
   }

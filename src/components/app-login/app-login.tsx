@@ -50,6 +50,7 @@ export class AppLogin {
   }
 
   logInEmailAccount(formData:{email:string, password:string}):void{
+    // Map Dispatch Action
     this.store.mapDispatchToProps(this, {
       fetchLogin
     });
