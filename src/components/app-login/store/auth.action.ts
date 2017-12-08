@@ -59,7 +59,11 @@ export const fetchLogin = (payload:{email:string,password:string}) => async (dis
     };
     return fetch(`http://localhost:8080/rest/auth`,options)
       .then(response => response.json())
-      .then(json => dispatch(loginSuccessAction(json)))
+      .then(json => {
+        (json.success)
+          ? dispatch(loginSuccessAction(json))
+          : dispatch(errorAction(json))
+      })
       .catch(err => dispatch(errorAction(err)))
 
 }

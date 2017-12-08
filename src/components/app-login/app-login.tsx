@@ -1,6 +1,5 @@
 import { Component, Prop } from '@stencil/core';
 import { Store, Action } from '@stencil/redux';
-import { RouterHistory } from '@stencil/router';
 
 import { fetchLogin } from './store/auth.action';
 
@@ -10,9 +9,7 @@ import { fetchLogin } from './store/auth.action';
 })
 export class AppLogin {
 
-  @Prop() history: RouterHistory;
   @Prop({ context: 'store' }) store: Store;
-
   fetchLogin: Action;
 
   switchForm(target:any){
@@ -62,15 +59,17 @@ export class AppLogin {
   render() {
     return (
       <div>
-        <p>
+        <h1>
           Login
-        </p>
+        </h1>
         <form>
           <input name="email" type="email" placeholder="your@email.com"/><br/>
           <input name="password" type="password" placeholder="password"/><br/>
           <button onClick={event=>this.formSubmit(event)}>Login</button>
         </form>
-        <p id="switchForm" onClick={(e: any) => this.switchForm(e.target)} >Click here to create new account</p>
+        <p id="switchForm" onClick={(e: UIEvent) => this.switchForm(e.target)} >
+          <small>Click here to create new account</small>
+        </p>
       </div>
     );
   }
