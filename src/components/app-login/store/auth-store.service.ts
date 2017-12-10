@@ -8,7 +8,7 @@
 
 import {loginAction,loginSuccessAction,logoutAction, logoutSuccessAction, errorAction} from "./auth.action";
 
-export const fetchLogin = (payload:{email:string,password:string}) => async (dispatch, _getState) => {
+export const dispatchLoginAction = (payload:{email:string,password:string}) => async (dispatch, _getState) => {
   dispatch(loginAction(payload))
   let headers = new Headers()
   headers.append('cache-control','no-cache')
@@ -29,13 +29,13 @@ export const fetchLogin = (payload:{email:string,password:string}) => async (dis
   .catch(err => dispatch(errorAction(err)))
 }
 
-export const logout = () => async (dispatch, _getState) => {
+export const dispatchLogoutAction = () => async (dispatch, _getState) => {
   dispatch(logoutAction())
   // TODO: rmv storage token
   return dispatch(logoutSuccessAction())
 }
 
 export const AuthStoreService = {
-  fetchLogin,
-  logout
+  dispatchLoginAction,
+  dispatchLogoutAction
 }

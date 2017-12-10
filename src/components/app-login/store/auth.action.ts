@@ -27,31 +27,54 @@ export interface ILoginAction {
   type: authActions.LOGIN,
   payload: any;
 }
-export const loginAction = (payload: any)  => {
+export const loginAction = (payload: any):ILoginAction  => {
   return {
     type: authActions.LOGIN,
     payload: payload
   }
 };
-export const loginSuccessAction = (payload: any) => {
+
+export interface IloginSuccessAction {
+  type: authActions.LOGIN_SUCCESS,
+  payload: any;
+}
+export const loginSuccessAction = (payload: any):IloginSuccessAction => {
   return {
     type: authActions.LOGIN_SUCCESS,
     payload: payload
   }
 };
-export const logoutAction = ()  => {
+
+export interface IlogoutAction {
+  type: authActions.LOGOUT
+}
+export const logoutAction = ():IlogoutAction  => {
   return {
     type: authActions.LOGOUT
   }
 };
+
+export interface IlogoutSuccessAction {
+  type: authActions.LOGOUT_SUCCESS
+}
 export const logoutSuccessAction = () => {
   return {
     type: authActions.LOGOUT_SUCCESS
   }
 };
-export const errorAction = (payload: any)=> {
+
+export interface IerrorAction {
+  type: authActions.ERROR,
+  payload: any;
+}
+export const errorAction = (payload: any):IerrorAction => {
   return {
     type: authActions.ERROR,
     payload: payload
   }
 };
+
+export type TAuthActions =
+ILoginAction | IloginSuccessAction |
+IlogoutAction | IlogoutSuccessAction |
+IerrorAction

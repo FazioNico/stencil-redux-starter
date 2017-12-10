@@ -2,7 +2,7 @@ import { Component, Prop, State } from '@stencil/core';
 import { Store, Action } from '@stencil/redux';
 import { RouterHistory } from '@stencil/router';
 
-import { appSetName } from '../../store/actions/app';
+import { appSetName } from '../../store/actions/app-config.action';
 import { AuthStoreService } from '../app-login/store//auth-store.service';
 
 @Component({
@@ -25,12 +25,12 @@ export class AppHome {
     this.store.mapStateToProps(this, (state) => {
       // use ES6 destructuring.
       // Doc: https://nicolasfazio.ch/blog/es6-destructuring
-      const { app: { name }} = state;
+      const { appConfig: { name }} = state;
       const {auth:curentUser} = state;
       return {name, curentUser}
     });
     // Map Dispatch Action
-    const {logout:dispatchLogout} = AuthStoreService;
+    const {dispatchLogoutAction:dispatchLogout} = AuthStoreService;
     this.store.mapDispatchToProps(this, {
       appSetName, dispatchLogout
     });

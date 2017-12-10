@@ -1,20 +1,16 @@
-import { AppSetNameAction } from './app';
-import * as auth from '../../components/app-login/store/auth.action';
+/**
+ * @Author: Nicolas Fazio <webmaster-fazio>
+ * @Date:   06-12-2017
+ * @Email:  contact@nicolasfazio.ch
+ * @Last modified by:   webmaster-fazio
+ * @Last modified time: 11-12-2017
+ */
 
-export interface NullAction {
-  type: TypeKeys.NULL
-}
+import { TAppConfigActions } from './app-config.action';
+import { TAuthActions } from '../../components/app-login/store/auth.action';
 
 // Keep this type updated with each known action
 export type ActionTypes =
-  | NullAction
-  | AppSetNameAction
-  | auth.ILoginAction
+  | TAppConfigActions
+  | TAuthActions
 ;
-
-export enum TypeKeys {
-  // Won't match anything
-  NULL = 'NULL',
-  ERROR = 'ERROR',
-  APP_SET_NAME = 'APP_SET_NAME'
-};

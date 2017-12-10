@@ -14,7 +14,7 @@ export class AppLogin {
 
   componentWillLoad() {
     // Map Dispatch Action
-    const {fetchLogin:dispatchLogin} = AuthStoreService;
+    const {dispatchLoginAction:dispatchLogin} = AuthStoreService;
     this.store.mapDispatchToProps(this, {
       dispatchLogin
     });

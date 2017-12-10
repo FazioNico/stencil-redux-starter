@@ -7,11 +7,12 @@
 */
 
 import { combineReducers } from 'redux';
-import app from './app';
+import appConfig from './app-config.reducer';
 import auth from '../../components/app-login/store/auth.reducer';
 
 const rootReducer = (combineReducers as any)({
-  app,auth
+  appConfig,
+  auth
 });
 
 export default rootReducer;
