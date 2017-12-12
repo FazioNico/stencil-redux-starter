@@ -4,7 +4,9 @@ import { RouterHistory } from '@stencil/router';
 
 import { appSetName } from '../../store/actions/app-config.action';
 import { AuthStoreService } from '../app-login/store//auth-store.service';
+import { canEnterIfAuthenticated } from "../../decorators";
 
+@canEnterIfAuthenticated
 @Component({
   tag: 'app-home',
   styleUrl: 'app-home.scss'
@@ -19,8 +21,7 @@ export class AppHome {
   appSetName: Action;
   dispatchLogout: Action;
 
-  componentWillLoad() {
-    // TODO: check if user is auth and kick him to loginPage if not.
+  initComponent(){
     // bind property to Store state
     this.store.mapStateToProps(this, (state) => {
       // use ES6 destructuring.
@@ -52,6 +53,7 @@ export class AppHome {
   }
 
   render() {
+    if (!this.curentUser) return;
     return (
       <div>
         <p>
@@ -73,5 +75,6 @@ export class AppHome {
           </button>
       </div>
     );
+
   }
 }

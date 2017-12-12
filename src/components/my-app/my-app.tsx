@@ -20,10 +20,10 @@ export class MyApp {
     this.store.mapStateToProps(this, (state) => {
       if(!this) return;
       const curentUser = state.auth;
-      //console.log('state...',this.activeRouter.get());
-      (curentUser._id)
+      (curentUser._id && window.location.pathname === '/')
         ? this.activeRouter.get().history.replace('/home',{})
-        : this.activeRouter.get().history.replace('/',{});
+        // using canEnterIfAuthenticated decorators to manage user state
+        : null; // this.activeRouter.get().history.replace('/',{});
       return {
         curentUser
       }

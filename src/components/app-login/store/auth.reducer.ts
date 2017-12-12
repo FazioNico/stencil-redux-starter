@@ -3,7 +3,7 @@
  * @Date:   07-12-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 07-12-2017
+ * @Last modified time: 12-12-2017
  */
 
  import { authActions, TAuthActions } from './auth.action';
@@ -24,6 +24,10 @@
      }
      case authActions.LOGOUT_SUCCESS: {
        return Object.assign({}, getInitialState())
+     }
+
+     case authActions.CHECK_AUTH_SUCCESS:{
+       return Object.assign({}, state, action.payload )
      }
    }
    return state;

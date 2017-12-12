@@ -1,4 +1,5 @@
 import { Component, Prop } from '@stencil/core';
+import { ActiveRouter } from '@stencil/router';
 import { Store, Action } from '@stencil/redux';
 
 import { AuthStoreService } from "./store/auth-store.service";
@@ -9,18 +10,26 @@ import { AuthStoreService } from "./store/auth-store.service";
 })
 export class AppLogin {
 
+  @Prop({ context: 'activeRouter' }) activeRouter: ActiveRouter;
   @Prop({ context: 'store' }) store: Store;
+  dispatchCheckAuth: Action;
   dispatchLogin: Action;
 
   componentWillLoad() {
     // Map Dispatch Action
+    const {dispatchCheckAuthAction:dispatchCheckAuth} = AuthStoreService;
     const {dispatchLoginAction:dispatchLogin} = AuthStoreService;
     this.store.mapDispatchToProps(this, {
-      dispatchLogin
+      dispatchLogin, dispatchCheckAuth
     });
+    // using setTimeout to prevent store unavailability
+    setTimeout(_=> {
+      this.dispatchCheckAuth()
+    },100)
   }
 
   switchForm(target:any){
+
     let list:any = target.classList;
     let classList:any = [...list];
 

@@ -1,16 +1,20 @@
 import { Component, Prop } from '@stencil/core';
 import { MatchResults } from '@stencil/router';
+import { Store } from '@stencil/redux';
 
+import { canEnterIfAuthenticated } from "../../decorators";
 
+@canEnterIfAuthenticated
 @Component({
   tag: 'app-profile',
   styleUrl: 'app-profile.scss'
 })
 export class AppProfile {
 
+  @Prop({ context: 'store' }) store: Store;
   @Prop() match: MatchResults;
 
-  componentWillLoad() {
+  initComponent() {
     console.log('->',this.match)
     console.log(this.match.params.name)
   }

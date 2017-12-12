@@ -3,7 +3,7 @@
  * @Date:   07-12-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 07-12-2017
+ * @Last modified time: 12-12-2017
  */
 
 export enum authActions {
@@ -21,6 +21,75 @@ export enum authActions {
   TOKEN_DELETE = '[Auth] TOKEN_REMOVE Requested',
   TOKEN_DELETE_SUCCESS = '[Auth] TOKEN_REMOVE Success',
   ERROR = '[Auth] Error'
+}
+
+export interface ICheckAuthAction {
+  type: authActions.CHECK_AUTH
+}
+export const checkAutAction = ():ICheckAuthAction  => {
+  return {
+    type: authActions.CHECK_AUTH
+  }
+};
+
+export interface ICheckAuthSuccessAction {
+  type:authActions.CHECK_AUTH_SUCCESS,
+  payload: any
+}
+export const checkAutSuccessAction = (payload:any):ICheckAuthSuccessAction  => {
+  return {
+    type: authActions.CHECK_AUTH_SUCCESS,
+    payload:payload
+  }
+}
+
+export interface ICheckAutNoUserAction {
+  type:authActions.CHECK_AUTH_NO_USER,
+  payload:any
+}
+export const checkAutNoUserAction = (payload:any):ICheckAutNoUserAction  => {
+  return {
+    type: authActions.CHECK_AUTH_NO_USER,
+    payload:payload
+  }
+}
+
+export interface ITokenSaveAction {
+  type: authActions.TOKEN_SAVE,
+  payload:any
+}
+export const tokenSaveAction = (payload: any):ITokenSaveAction  => {
+  return {
+    type: authActions.TOKEN_SAVE,
+    payload: payload
+  }
+}
+
+export interface ITokenSaveSuccessAction {
+  type: authActions.TOKEN_SAVE_SUCCESS
+}
+export const tokenSaveSuccessAction = ():ITokenSaveSuccessAction  => {
+  return {
+    type: authActions.TOKEN_SAVE_SUCCESS
+  }
+}
+
+export interface ITokenDeleteAction {
+  type: authActions.TOKEN_DELETE
+}
+export const tokenDelete =  ():ITokenDeleteAction  => {
+  return {
+    type: authActions.TOKEN_DELETE
+  }
+}
+
+export interface ITokenDeleteSuccessAction {
+  type: authActions.TOKEN_DELETE_SUCCESS
+}
+export const tokenDeleteSuccessAction = ():ITokenDeleteSuccessAction  => {
+  return {
+    type: authActions.TOKEN_DELETE_SUCCESS
+  }
 }
 
 export interface ILoginAction {
@@ -57,7 +126,7 @@ export const logoutAction = ():IlogoutAction  => {
 export interface IlogoutSuccessAction {
   type: authActions.LOGOUT_SUCCESS
 }
-export const logoutSuccessAction = () => {
+export const logoutSuccessAction = ():IlogoutSuccessAction => {
   return {
     type: authActions.LOGOUT_SUCCESS
   }
@@ -77,4 +146,6 @@ export const errorAction = (payload: any):IerrorAction => {
 export type TAuthActions =
 ILoginAction | IloginSuccessAction |
 IlogoutAction | IlogoutSuccessAction |
+ITokenDeleteAction | ITokenDeleteSuccessAction |
+ICheckAuthAction | ICheckAuthSuccessAction | ICheckAutNoUserAction |
 IerrorAction
