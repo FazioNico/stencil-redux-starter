@@ -132,6 +132,28 @@ export const logoutSuccessAction = ():IlogoutSuccessAction => {
   }
 };
 
+export interface ICreateAction {
+  type: authActions.CREATE,
+  payload: any
+}
+export const createAction = (payload: any):ICreateAction => {
+  return {
+    type: authActions.CREATE,
+    payload: payload
+  }
+};
+
+export interface ICreateSuccessAction {
+  type: authActions.CREATE_SUCCESS,
+  payload: any
+}
+export const createSuccessAction = (payload: any):ICreateSuccessAction => {
+  return {
+    type: authActions.CREATE_SUCCESS,
+    payload: payload
+  }
+};
+
 export interface IerrorAction {
   type: authActions.ERROR,
   payload: any;
@@ -146,6 +168,7 @@ export const errorAction = (payload: any):IerrorAction => {
 export type TAuthActions =
 ILoginAction | IloginSuccessAction |
 IlogoutAction | IlogoutSuccessAction |
+ICreateAction | ICreateSuccessAction | 
 ITokenDeleteAction | ITokenDeleteSuccessAction |
 ICheckAuthAction | ICheckAuthSuccessAction | ICheckAutNoUserAction |
 IerrorAction

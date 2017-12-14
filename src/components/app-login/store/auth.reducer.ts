@@ -19,6 +19,11 @@
    action: TAuthActions
  ) => {
    switch (action.type) {
+
+     case authActions.CREATE_SUCCESS:{
+       return Object.assign({},  action.payload.user )
+     }
+
      case authActions.LOGIN_SUCCESS: {
        return Object.assign({}, state, action.payload.user)
      }

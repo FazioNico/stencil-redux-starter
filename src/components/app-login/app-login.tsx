@@ -14,13 +14,17 @@ export class AppLogin {
   @Prop({ context: 'store' }) store: Store;
   dispatchCheckAuth: Action;
   dispatchLogin: Action;
+  dispatchCreate: Action;
 
   componentWillLoad() {
-    // Map Dispatch Action
-    const {dispatchCheckAuthAction:dispatchCheckAuth} = AuthStoreService;
-    const {dispatchLoginAction:dispatchLogin} = AuthStoreService;
+    // Map Dispatch Action dispatchCreateAction
+    const {
+      dispatchCheckAuthAction:dispatchCheckAuth,
+      dispatchLoginAction:dispatchLogin,
+      dispatchCreateAction:dispatchCreate,
+    } = AuthStoreService;
     this.store.mapDispatchToProps(this, {
-      dispatchLogin, dispatchCheckAuth
+      dispatchLogin, dispatchCheckAuth, dispatchCreate
     });
     // using setTimeout to prevent store unavailability
     setTimeout(_=> {
@@ -30,18 +34,18 @@ export class AppLogin {
 
   switchForm(target:any){
 
-    let list:any = target.classList;
+    let list:any = target.closest('p').classList;
     let classList:any = [...list];
 
     switch (classList.includes('create')) {
       case false:
-        target.classList.toggle('create')
-        target.innerHTML = 'Click here to login with existing account'
+        target.closest('p').classList.toggle('create')
+        target.closest('p').innerHTML = '<small>Click here to login with existing account</small>'
         document.forms[0].querySelector('button').innerHTML = 'Create an account'
         break;
       case true:
-        target.classList.toggle('create')
-        target.innerHTML = 'Click here to create new account'
+        target.closest('p').classList.toggle('create')
+        target.closest('p').innerHTML = '<small>Click here to create new account</small>'
         document.forms[0].querySelector('button').innerHTML = 'Login'
         break;
       default:
@@ -62,12 +66,8 @@ export class AppLogin {
     let list:any = document.getElementById('switchForm').classList;
     let classList:any = [...list];
     (classList.includes('create'))
-     ?  null // this.createEmailAccount(formData.email, formData.password)
-     : this.logInEmailAccount(formData);
-  }
-
-  logInEmailAccount(formData:{email:string, password:string}):void{
-    this.dispatchLogin(formData);
+     ? this.dispatchCreate(formData)
+     : this.dispatchLogin(formData);
   }
 
   render() {

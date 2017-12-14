@@ -19,7 +19,7 @@ export class MyApp {
     // here we are monitoring user auth state with Redux
     this.store.mapStateToProps(this, (state) => {
       if(!this) return;
-      const curentUser = state.auth;
+      const {auth:curentUser} = state;
       (curentUser._id && window.location.pathname === '/')
         ? this.activeRouter.get().history.replace('/home',{})
         // using canEnterIfAuthenticated decorators to manage user state

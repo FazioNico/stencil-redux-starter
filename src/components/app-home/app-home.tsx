@@ -26,8 +26,10 @@ export class AppHome {
     this.store.mapStateToProps(this, (state) => {
       // use ES6 destructuring.
       // Doc: https://nicolasfazio.ch/blog/es6-destructuring
-      const { appConfig: { name }} = state;
-      const {auth:curentUser} = state;
+      const {
+        appConfig: { name },
+        auth:curentUser
+      } = state;
       return {name, curentUser}
     });
     // Map Dispatch Action

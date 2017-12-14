@@ -11,6 +11,8 @@ import {
   loginSuccessAction,
   logoutAction,
   logoutSuccessAction,
+  createAction,
+  createSuccessAction,
   checkAutAction,
   checkAutSuccessAction,
   checkAutNoUserAction,
@@ -83,6 +85,37 @@ export const dispatchCheckAuthAction = () => async (dispatch, _getState) => {
   .catch(err => dispatch(errorAction(err)))
 }
 
+export const dispatchCreateAction = (payload:{email:string, passworf:string}) => async (dispatch, _getState) => {
+  dispatch(createAction(payload))
+  let token:string|null = localStorage.getItem('token')
+  let headers = new Headers()
+      headers.append('cache-control','no-cache')
+      headers.append('content-type','application/json')
+      headers.append('x-access-token',token)
+  let options = {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(payload)
+  };
+  return fetch(`http://localhost:8080/rest/signup`,options)
+  .then(response => response.json())
+  .then(json => {
+    if(!json.success) return json;
+    // work with token
+    dispatch(tokenSaveAction(json.token))
+    localStorage.setItem('token', json.token)
+    dispatch(tokenSaveSuccessAction());
+    return json
+  })
+  .then(json => {
+    (json.success)
+      ? dispatch(createSuccessAction(json))
+      : dispatch(errorAction(json));
+    return json
+  })
+  .catch(err => dispatch(errorAction(err)))
+};
+
 export const isAuthenticated =  async() => {
     let isAuthenticated:boolean = false ;
     let token:string|null = localStorage.getItem('token')
@@ -106,5 +139,6 @@ export const isAuthenticated =  async() => {
 }
 export const AuthStoreService = {
   dispatchLoginAction, dispatchLogoutAction,
+  dispatchCreateAction,
   dispatchCheckAuthAction
 }
